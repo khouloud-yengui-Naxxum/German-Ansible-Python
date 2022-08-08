@@ -1,1 +1,10 @@
-
+- name: Install the python venv
+  hosts: localhost
+  user: root
+  tasks:                                                                                                       
+  - name: create a python virtual environment
+    shell: python3 -m venv /opt/python_venvs/
+  - name: Activate the virtual environment
+    shell: source /opt/python_venvs/bin/activate
+  - name: Install all dependencies
+    shell: pip install -r requirements1.txt
