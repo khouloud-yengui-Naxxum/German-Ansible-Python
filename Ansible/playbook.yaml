@@ -1,12 +1,14 @@
 - name: Install the python venv
   hosts: controlmachine
   user: root
+  vars:
+    requierement: requirements1
   tasks:                                                                                                       
   - name: create a python virtual environment
-    shell: python3 -m venv /opt/python_venvs/
+    shell: python3 -m venv /opt/python_venvs/{{requierement}}/
   - name: Activate the virtual environment
     shell: source /opt/python_venvs/bin/activate
     args:
       executable: /bin/bash
   - name: Install all dependencies
-    shell: pip install -r ../venv/requirements1.txt
+    shell: pip install -r ../venv/{{requierement}}.txt
