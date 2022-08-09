@@ -3,9 +3,9 @@
   user: root
   tasks:                                                                                                       
   - name: create a python virtual environment
-    shell: python3 -m venv home/ubuntu/venv/
+    shell: python3 -m venv /opt/python_venvs/
   - name: Activate the virtual environment
-    shell: source home/ubuntu/venv/bin/activate
+    shell: source /opt/python_venvs/bin/activate
     args:
       executable: /bin/bash
   - name: Install all dependencies
