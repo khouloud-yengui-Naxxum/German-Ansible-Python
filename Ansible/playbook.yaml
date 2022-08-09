@@ -7,7 +7,7 @@
   - name: create a python virtual environment
     shell: python3 -m venv /opt/python_venvs/{{requierement}}/
   - name: Activate the virtual environment
-    shell: source /opt/python_venvs/bin/activate
+    shell: source /opt/python_venvs/{{requierement}}/bin/activate
     args:
       executable: /bin/bash
   - name: Install all dependencies
