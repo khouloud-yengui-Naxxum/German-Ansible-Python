@@ -1,5 +1,5 @@
 - name: Install the python venv
-  hosts: localhost
+  hosts: controlmachine
   user: root
   tasks:                                                                                                       
   - name: create a python virtual environment
