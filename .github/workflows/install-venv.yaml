@@ -42,4 +42,4 @@ jobs:
           python3 -m pip install  ansible
       - name: run playbook
         run: |
-          ansible-playbook -i Ansible/inventory.yaml Ansible/playbook.yaml
+          ansible-playbook  Ansible/playbook.yaml
