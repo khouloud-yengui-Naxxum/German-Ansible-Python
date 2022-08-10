@@ -13,7 +13,7 @@
   - name: Install all dependencies
     shell: pip install -r ../venv/{{requierement}}.txt
   - name: Deactivate the environment 
-    shell: deactivate
+    shell: source deactivate
     args:
       executable: /bin/bash
 
