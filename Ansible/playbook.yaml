@@ -8,7 +8,7 @@
     shell: python3 -m venv /opt/python_venvs/{{requierement}}/
   - name: Activate the virtual environment
     shell: |
-    source /opt/python_venvs/{{requierement}}/bin/activate
+    source "/opt/python_venvs/{{requierement}}/bin/activate"
     pip install -r "../venv/{{requierement}}.txt"
     deactivate
     
