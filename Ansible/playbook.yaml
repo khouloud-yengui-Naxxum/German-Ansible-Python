@@ -14,4 +14,6 @@
     shell: pip install -r ../venv/{{requierement}}.txt
   - name: Deactivate the environment 
     shell: deactivate
+    args:
+      executable: /bin/bash
 
