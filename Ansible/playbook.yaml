@@ -1,5 +1,5 @@
 - name: Install the python venv
-  hosts: controlmachine
+  hosts: localhost
   user: root
   vars:
     requierement: requirements1
