@@ -9,7 +9,7 @@
   - name: Activate the virtual environment
     shell: |
     source /opt/python_venvs/{{requierement}}/bin/activate
-    pip install -r ../venv/{{requierement}}.txt
-    
+    pip install -r "../venv/{{requierement}}.txt"
+    deactivate
     
 
