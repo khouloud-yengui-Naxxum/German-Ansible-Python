@@ -2,7 +2,11 @@
   hosts: localhost
   user: root
   tasks: 
-  - name: "create python virtual environment from the venv folder"
+  - name: "Ansible check /opt/python_venvs/ exists"
+    stat:
+      path: /opt/python_venvs/
+    register: p
+  - name: "create python virtual environment from the venv folder /opt/python_venvs/ doesn't exist  "
     shell: |
       python3 -m venv /opt/python_venvs/{{ item | basename }}/
       source "/opt/python_venvs/{{ item | basename }}/bin/activate"
@@ -14,3 +18,4 @@
     with_fileglob: "../venv/*.txt"
     loop_control:
       label: "{{ item | basename }}"
+    when: p.stat.exists == False
