@@ -1,20 +1,16 @@
 - name: Install the python venv
   hosts: localhost
   user: root
-  vars:
-    requierement: requirements1
-  tasks:                                                                                                       
-  - name: create a python virtual environment
-    shell: python3 -m venv /opt/python_venvs/{{requierement}}/
-  - name: Activate the virtual environment
-    shell: |
-      source "/opt/python_venvs/{{requierement}}/bin/activate"
-      pip install -r "../venv/{{requierement}}.txt"
+  tasks: 
+- name: "create python virtual environment from the venv folder"
+  shell: |
+      python3 -m venv /opt/python_venvs/{{ item | basename }}/
+      source "/opt/python_venvs/{{ item | basename }}/bin/activate"
+      pip install -r "../venv/{{ item | basename }}.txt"
       deactivate
-    args:
-      executable: /bin/bash
-    
-    
-    
-    
-
+  args:
+    executable: /bin/bash
+    chdir: "../venv/"
+  with_fileglob: "../venv/*.txt"
+  loop_control:
+    label: "{{ item | basename }}"
