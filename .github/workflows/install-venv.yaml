@@ -57,7 +57,7 @@ jobs:
           done
       - name: Filter all files under  venv/ folder
         run: |
-            CHANGED_fILES=`find ${{ steps.changed-files.outputs.all_changed_files }} -name "venv/*"`
+            CHANGED_fILES=` ${{ steps.changed-files.outputs.all_changed_files }} | xargs grep "venv/*"`
             echo $CHANGED_fILES
            
       - name: run playbook
