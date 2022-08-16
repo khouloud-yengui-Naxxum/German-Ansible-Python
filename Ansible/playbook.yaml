@@ -7,11 +7,10 @@
   - name: create a python virtual environment
     shell: python3 -m venv /opt/python_venvs/{{requierement}}/
   - name: Activate the virtual environment
-    shell: "{{ item }}"
-    with_items:
-    - source "/opt/python_venvs/{{requierement}}/bin/activate"
-    - pip install -r "../venv/{{requierement}}.txt"
-    - deactivate
+    shell: |
+      source "/opt/python_venvs/{{requierement}}/bin/activate"
+      pip install -r "../venv/{{requierement}}.txt"
+      deactivate
     args:
       executable: /bin/bash
     
