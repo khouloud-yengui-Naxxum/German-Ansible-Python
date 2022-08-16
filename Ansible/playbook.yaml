@@ -3,8 +3,7 @@
   user: root
   tasks: 
 - name: "create python virtual environment from the venv folder"
-  shell:
-      python3 -m venv "/opt/python_venvs/{{ item | basename }}/"
+  shell: python3 -m venv "/opt/python_venvs/{{ item | basename }}/"
   args:
     executable: /bin/bash
     chdir: "../venv/"
