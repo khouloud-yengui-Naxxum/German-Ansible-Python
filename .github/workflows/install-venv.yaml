@@ -57,8 +57,9 @@ jobs:
             echo "$file was changed"
           done
       - name: Filter all files under  venv/ folder
-        run: 
-          CHANGED_fILES = $(find ${{ steps.changed-files.outputs.all_changed_files }} venv/*.txt);
+        run: |
+            find ${{ steps.changed-files.outputs.all_changed_files }} venv/*.txt  > $CHANGED_fILES
+            echo $CHANGED_fILES
            
       - name: run playbook
         run: |
