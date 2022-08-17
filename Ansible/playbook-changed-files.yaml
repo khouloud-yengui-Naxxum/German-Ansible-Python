@@ -5,6 +5,6 @@
     my_changed_files: "{{ changed_files }}"
   tasks: 
   - debug:
-    msg: "{{ item }}"
+      msg: "{{ item }}"
     loop: "{{ my_changed_files }}"
    
