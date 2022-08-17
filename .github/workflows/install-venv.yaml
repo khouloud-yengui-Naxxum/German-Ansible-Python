@@ -42,24 +42,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python3 -m pip install  ansible
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
           
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v26.1
-
-      - name: List all changed files
+      - uses: actions/checkout@v2
+      - name: List all changed files under  venv/ folder
+        uses: tj-actions/verify-changed-files@v10.1
+        id: verify-changed-files
+        with:
+          files: venv/*.txt 
+      - name: Run step only when files change.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }} ; do
-            echo "$file was changed"
-          done
-      - name: Filter all files under  venv/ folder
-        run: |
-            CHANGED_fILES=` ${{ steps.changed-files.outputs.all_changed_files }} | xargs grep "venv/*"`
-            echo $CHANGED_fILES
-           
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
       - name: run playbook
         run: |
           ansible-playbook  Ansible/playbook.yaml
