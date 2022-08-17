@@ -12,7 +12,7 @@
       if  [ -d /opt/python_venvs/{{ item | basename }}/ ]; then 
          source "/opt/python_venvs/{{ item | basename }}/bin/activate"
          Installed_package= `pip freez`
-         for line in $(cat ../venv/{{ item | basename }}.txt) ;  
+         for line in $(cat ../venv/{{ item | basename }}.txt) ; do
             if ! grep $line $Installed_package ;then
                  pip install $line
             fi;
