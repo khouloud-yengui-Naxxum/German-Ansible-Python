@@ -53,11 +53,11 @@ jobs:
         with:
           files: venv/*.txt
 
-      - name: List all changed files
+      - name: Run step only when files change.
+        if: steps.changed-files.outputs.files_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+          echo "Changed files: ${{ steps.changed-files.outputs.changed_files }}"
+
       - name: run playbook
         run: |
           ansible-playbook  Ansible/playbook.yaml
