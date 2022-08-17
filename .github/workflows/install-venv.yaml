@@ -52,10 +52,15 @@ jobs:
         uses: tj-actions/changed-files@v26.1
         with:
           files: venv/*.txt
-      - name: Run step only when files change.
-        if: ${{ steps.changed-files.outputs.changed_files }}
+      - name: List all changed files
         run: |
-          echo "Changed files: ${{ steps.changed-files.outputs.changed_files }}"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done    
+      - name: Run step only when files change.
+        if: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
 
       - name: run playbook
         run: |
