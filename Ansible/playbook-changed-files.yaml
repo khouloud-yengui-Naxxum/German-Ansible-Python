@@ -6,5 +6,5 @@
   tasks: 
   - debug:
       msg: "{{ item }}"
-    loop: "{{ my_changed_files }}"
+    with_items: "{{ my_changed_files }}"
    
