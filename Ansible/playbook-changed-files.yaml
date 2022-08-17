@@ -6,14 +6,15 @@
   tasks: 
   - name: "create python virtual environment from the  changed files under venv  "
     shell: |
-      python3 -m venv /opt/python_venvs/{{ item | basename }}/
       source "/opt/python_venvs/{{ item | basename }}/bin/activate"
-      pip install -r "../venv/{{ item | basename }}.txt"
+      Installed_package= `pip freez`
+      for line in $(cat ../venv/{{ item | basename }}.txt) ;  
+         if ! grep $line $Installed_package ;then
+            pip install $line
+         fi;
+      done      
       deactivate
     args:
       executable: /bin/bash
-      chdir: "../venv/"
-    with_fileglob: "../venv/*.txt"
-    loop_control:
-      label: "{{ item | basename }}"
-    when: p.stat.exists == False
+    loop: "{{ changed_files }}"
+   
