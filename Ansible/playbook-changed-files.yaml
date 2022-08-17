@@ -6,5 +6,5 @@
   tasks: 
   - debug:
       msg: "{{ item }}"
-    loop: "{{ ansible_play_batch }}"
+    loop: "{{ my_changed_files }}"
    
