@@ -34,8 +34,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -45,15 +43,21 @@ jobs:
           python -m pip install --upgrade pip
           python3 -m pip install  ansible
 
-      - name: List all changed files under  venv/ folder
-        uses: tj-actions/changed-files@v26.1
-        id: verify-changed-files
+      - uses: actions/checkout@v3
         with:
-          files: venv/*.txt 
-      - name: Run step only when files change.
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v26.1
+        with:
+          files: venv/*.txt
+
+      - name: List all changed files
         run: |
-          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
       - name: run playbook
         run: |
           ansible-playbook  Ansible/playbook.yaml
