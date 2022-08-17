@@ -4,6 +4,7 @@
   vars:
     my_changed_files: "{{ changed_files }}"
   tasks: 
-  - name: Display variable
-    debug: var=my_changed_files
+  - debug:
+      msg: "{{ item }}"
+    loop: "{{ ansible_play_batch }}"
    
