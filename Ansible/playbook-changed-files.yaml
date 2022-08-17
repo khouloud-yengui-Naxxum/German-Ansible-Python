@@ -23,5 +23,5 @@
       fi;
     args:
       executable: /bin/bash
-    loop: "{{ changed_files }}"
+    loop: "{{ my_changed_files }}"
    
