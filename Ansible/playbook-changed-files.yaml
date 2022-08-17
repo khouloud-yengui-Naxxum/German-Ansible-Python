@@ -1,0 +1,19 @@
+- name: Install the python venv
+  hosts: localhost
+  user: root
+  vars:
+    my_changed_files: "{{ changed_files }}"
+  tasks: 
+  - name: "create python virtual environment from the  changed files under venv  "
+    shell: |
+      python3 -m venv /opt/python_venvs/{{ item | basename }}/
+      source "/opt/python_venvs/{{ item | basename }}/bin/activate"
+      pip install -r "../venv/{{ item | basename }}.txt"
+      deactivate
+    args:
+      executable: /bin/bash
+      chdir: "../venv/"
+    with_fileglob: "../venv/*.txt"
+    loop_control:
+      label: "{{ item | basename }}"
+    when: p.stat.exists == False
