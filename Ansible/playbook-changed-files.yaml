@@ -7,4 +7,24 @@
   - debug:
       msg: "{{ item }}"
     with_items: "{{ my_changed_files }}"
+  - name: "create python virtual environment from the  changed files under venv  "
+    shell: |
+      if  [ -d /opt/python_venvs/{{ item | basename }}/ ]; then 
+         source "/opt/python_venvs/{{ item | basename }}/bin/activate"
+         Installed_package= `pip freez`
+         for line in $(cat ../venv/{{ item | basename }}.txt) ;  
+            if ! grep $line $Installed_package ;then
+                 pip install $line
+            fi;
+         done      
+         deactivate
+      else
+          python3 -m venv /opt/python_venvs/{{ item | basename }}/
+          source "/opt/python_venvs/{{ item | basename }}/bin/activate"
+          pip install -r "../venv/{{ item | basename }}.txt"
+          deactivate
+      fi;
+    args:
+      executable: /bin/bash
+    with_items: "{{ my_changed_files }}"
    
