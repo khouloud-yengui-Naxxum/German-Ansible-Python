@@ -2,7 +2,7 @@
   hosts: localhost
   user: root
   vars:
-    my_changed_files: "{{ lookup('env', 'changed_files') }}"
+    my_changed_files: "{{ lookup('env', 'changed_files_var') }}"
 
   tasks: 
   - debug:
