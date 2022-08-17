@@ -51,16 +51,12 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v26.1
         with:
-          files: venv/*.txt
-      - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done    
+          files: venv/*.txt 
       - name: Run step only when files change.
         if: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          ansible-playbook  Ansible/playbook-changed-files.yaml --extra-vars "changed_files=${{ steps.changed-files.outputs.all_changed_files }}"
 
       - name: run playbook
         run: |
