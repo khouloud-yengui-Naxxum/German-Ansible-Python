@@ -55,8 +55,8 @@ jobs:
       - name: Run step only when files change.
         if: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          changed_files=${{ steps.changed-files.outputs.all_changed_files }}
-          echo "Changed files: ${{ changed_files }}"
+          changed_files_var=${{ steps.changed-files.outputs.all_changed_files }}
+          echo "Changed files: ${{ changed_files_var }}"
           ansible-playbook  Ansible/playbook-changed-files.yaml 
 
       - name: run playbook
