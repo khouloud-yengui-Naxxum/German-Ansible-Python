@@ -75,14 +75,15 @@ will be launched at each commit or pull request on the main branch which contain
 ```        
        
 *   Ansible/playbook.yaml : this playbook will be run on the localhost, it contains two tasks :
-    *   the first checks whether the folder /opt/python_venvs/ exists or not on the server with the ansible module "stat" which returns a boolean value that will be           stored in the variable p
+
+  1. the first checks whether the folder /opt/python_venvs/ exists or not on the server with the ansible module "stat" which returns a boolean value that will be           stored in the variable p
 ```yaml
 - name: "Ansible check /opt/python_venvs/ exists"
     stat:
       path: /opt/python_venvs/
     register: p
 ```   
-    *   the second task will only be executed if /opt/python_venvs/ does not exist so that means that we are running the playbook on a new server,
+  2. the second task will only be executed if /opt/python_venvs/ does not exist so that means that we are running the playbook on a new server,
         this task access to the ../venv/ folder and iterate all files with .txt format , using the ansible module "Loop" and for
         each file under ../venv/ it installs the virtual python environment , where it installs all the packages mentionned in this file 
 ```yaml
