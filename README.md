@@ -3,20 +3,20 @@ virtual environments that contain installed packages following .txt files
 containing the necessary packages with their versions for each environment.
 this project contains 3 folders: venv/ , Ansible/ and .github/workflows/
 
--the venv/ folder: contains .txt files that contain the python packages that will be installed
+the venv/ folder: contains .txt files that contain the python packages that will be installed
 
--the Ansible/ folder: which contains two .yaml files which are the playbooks that will be
+the Ansible/ folder: which contains two .yaml files which are the playbooks that will be
  executed when launching the pipeline which is located in the .github/workflows/ folder.
 
 
--the .github/workflows/ folder: contains a pipeline called install-venv.yaml which
+the .github/workflows/ folder: contains a pipeline called install-venv.yaml which
 will be launched at each commit or pull request on the main branch which contains 2 jobs
  which will be executed on a github runner: ubuntu-latest 
 
-  * the first is "Validate": which checks if the repository under $GITHUB_WORKSPACE,
+   the first is "Validate": which checks if the repository under $GITHUB_WORKSPACE,
   so that your work can access it
 
-  * the second is "Run playbook": which contains several steps
+   the second is "Run playbook": which contains several steps
       -the first step: install python 3.9 and ansible in the runner to be able
       run ansible playbooks
       -the second step "Install python venv on new server": which allows to run the playbook Ansible/playbook.yaml 
