@@ -55,7 +55,7 @@ jobs:
         uses: tj-actions/changed-files@v26.1
         with:
           files: venv/*.txt 
-      - name: Install python the new python packages
+      - name: Install  the new python packages
         if: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           echo "Changed files: $changed_files_var"
