@@ -11,7 +11,7 @@ this project contains 3 folders: venv/ , Ansible/ and .github/workflows/
 
 -the .github/workflows/ folder: contains a pipeline called install-venv.yaml which
 will be launched at each commit or pull request on the main branch which contains 2 jobs
- which will be executed on a github runner: ubuntu-latest ,
+ which will be executed on a github runner: ubuntu-latest 
 
   * the first is "Validate": which checks if the repository under $GITHUB_WORKSPACE,
   so that your work can access it
