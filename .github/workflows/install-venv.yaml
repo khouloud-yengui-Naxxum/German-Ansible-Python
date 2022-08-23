@@ -43,13 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           python3 -m pip install  ansible
           
-      - name: Install python venv on new server
-        run: |
-          ansible-playbook  Ansible/playbook.yaml
-      - name: display the content of /opt/python_venvs/
-        run: |
-         cd /opt/python_venvs/
-         ls -al
+
           
       - uses: actions/checkout@v3
         with:
@@ -67,6 +61,14 @@ jobs:
         env:
           changed_files_var: ${{ steps.changed-files.outputs.all_changed_files }}
       
+      - name: display the content of /opt/python_venvs/
+        run: |
+         cd /opt/python_venvs/
+         ls -al
+         
+      - name: Install python venv on new server
+        run: |
+          ansible-playbook  Ansible/playbook.yaml
       - name: display the content of /opt/python_venvs/
         run: |
          cd /opt/python_venvs/
