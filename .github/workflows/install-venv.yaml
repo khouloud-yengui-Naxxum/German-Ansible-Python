@@ -16,7 +16,7 @@ jobs:
   # This workflow contains a single job called "validate"
   validate:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,7 +28,7 @@ jobs:
           args: "ansible" # my ansible files in a folder
   run-playbook:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     # The validate Job need to be sucessfull
     needs: [ validate ]
     steps:
@@ -43,7 +43,13 @@ jobs:
           python -m pip install --upgrade pip
           python3 -m pip install  ansible
           
-
+      - name: Install python venv on new server
+        run: |
+          ansible-playbook  Ansible/playbook.yaml
+      - name: display the content of /opt/python_venvs/
+        run: |
+         cd /opt/python_venvs/
+         ls -al
           
       - uses: actions/checkout@v3
         with:
@@ -66,13 +72,7 @@ jobs:
          cd /opt/python_venvs/
          ls -al
          
-      - name: Install python venv on new server
-        run: |
-          ansible-playbook  Ansible/playbook.yaml
-      - name: display the content of /opt/python_venvs/
-        run: |
-         cd /opt/python_venvs/
-         ls -al
+
 
      
 
