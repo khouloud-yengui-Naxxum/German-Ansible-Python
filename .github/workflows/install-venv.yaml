@@ -46,6 +46,10 @@ jobs:
       - name: Install python venv on new server
         run: |
           ansible-playbook  Ansible/playbook.yaml
+      - name: display the content of /opt/python_venvs/
+        run: |
+         cd /opt/python_venvs/
+         ls -al
           
       - uses: actions/checkout@v3
         with:
@@ -62,6 +66,11 @@ jobs:
           ansible-playbook  Ansible/playbook-changed-files.yaml 
         env:
           changed_files_var: ${{ steps.changed-files.outputs.all_changed_files }}
+      
+      - name: display the content of /opt/python_venvs/
+        run: |
+         cd /opt/python_venvs/
+         ls -al
 
      
 
