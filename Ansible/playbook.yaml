@@ -8,7 +8,7 @@
     register: p
   - name: "create python virtual environment from the venv folder /opt/python_venvs/ doesn't exist  "
     shell: |
-      python3 -m venv /opt/python_venvs/{{ item | basename }}/
+      sudo python3 -m venv /opt/python_venvs/{{ item | basename }}/
       source "/opt/python_venvs/{{ item | basename }}/bin/activate"
       pip install -r "../venv/{{ item | basename }}"
       deactivate
