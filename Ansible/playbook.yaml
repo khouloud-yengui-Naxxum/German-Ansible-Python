@@ -18,4 +18,3 @@
     with_fileglob: "../venv/*.txt"
     loop_control:
       label: "{{ item | basename }}"
-    when: p.stat.exists == False
