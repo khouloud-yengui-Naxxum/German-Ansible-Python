@@ -1,4 +1,5 @@
 tensorflow
 uvicorn
+flask
 
 
