@@ -1,5 +1,5 @@
 tensorflow
 uvicorn
 flask
-
+numpy
 
