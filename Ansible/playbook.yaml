@@ -10,7 +10,7 @@
     shell: |
       sudo python3 -m venv /opt/python_venvs/{{ item | basename }}/
       source "/opt/python_venvs/{{ item | basename }}/bin/activate"
-      pip install -r "../venv/{{ item | basename }}.txt"
+      pip install -r "../venv/{{ item | basename }}"
       deactivate
     args:
       executable: /bin/bash
