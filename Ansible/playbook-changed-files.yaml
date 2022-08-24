@@ -10,7 +10,7 @@
     with_items: "{{ my_changed_files }}"
   - name: "create python virtual environment from the  changed files under venv  "
     shell: |
-      if  [ -d /opt/python_venvs/{{ item | basename }}/ ]; then 
+      if  [  -e /opt/python_venvs/{{ item | basename }}/ ]; then 
          source "/opt/python_venvs/{{ item | basename }}/bin/activate"
          Installed_package= `pip freeze`
          for line in $(cat ../venv/{{ item | basename }}) ; do
