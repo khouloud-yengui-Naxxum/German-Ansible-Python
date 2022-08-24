@@ -8,10 +8,10 @@
     register: p
   - name: "create python virtual environment from the venv folder /opt/python_venvs/ doesn't exist  "
     shell: |
-      sudo python3 -m venv /opt/python_venvs/{{ item | basename }}/
-      sudo source "/opt/python_venvs/{{ item | basename }}/bin/activate"
-      sudo pip install -r "../venv/{{ item | basename }}.txt"
-      sudo deactivate
+      python3 -m venv /opt/python_venvs/{{ item | basename }}/
+      source "/opt/python_venvs/{{ item | basename }}/bin/activate"
+      pip install -r "../venv/{{ item | basename }}.txt"
+      deactivate
     args:
       executable: /bin/bash
       chdir: "../venv/"
