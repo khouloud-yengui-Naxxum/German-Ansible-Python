@@ -16,7 +16,7 @@ jobs:
   # This workflow contains a single job called "validate"
   validate:
     # The type of runner that the job will run on
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,7 +28,7 @@ jobs:
           args: "ansible" # my ansible files in a folder
   run-playbook:
     # The type of runner that the job will run on
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     # The validate Job need to be sucessfull
     needs: [ validate ]
     steps:
@@ -42,6 +42,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python3 -m pip install  ansible
+      - name: Display the version of Ansible  and python 
+        run: |
+          python --version
+          ansible --version
           
       - name: Install python venv on new server
         run: |
