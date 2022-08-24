@@ -12,8 +12,8 @@
     shell: |
       if  [ -d /opt/python_venvs/{{ item | basename }}/ ]; then 
          source "/opt/python_venvs/{{ item | basename }}/bin/activate"
-         Installed_package= `pip freez`
-         for line in $(cat ../venv/{{ item | basename }}.txt) ; do
+         Installed_package= `pip freeze`
+         for line in $(cat ../venv/{{ item | basename }}) ; do
             if ! grep $line $Installed_package ;then
                  pip install $line
             fi;
@@ -22,7 +22,7 @@
       else
           python3 -m venv /opt/python_venvs/{{ item | basename }}/
           source "/opt/python_venvs/{{ item | basename }}/bin/activate"
-          pip install -r "../venv/{{ item | basename }}.txt"
+          pip install -r "../venv/{{ item | basename }}"
           deactivate
       fi;
     args:
