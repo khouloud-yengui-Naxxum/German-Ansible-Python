@@ -8,10 +8,8 @@
     register: p
   - name: "create python virtual environment from the venv folder /opt/python_venvs/ doesn't exist  "
     shell: |
-      Item= {{ item | basename }}
-      File=$(echo "$Item" | cut -f 1 -d '.')
-      sudo python3 -m venv /opt/python_venvs/$File/
-      source "/opt/python_venvs/$File/bin/activate"
+      sudo python3 -m venv /opt/python_venvs/{{ item | basename| splitext | first  }}/
+      source "/opt/python_venvs/{{ item | basename| splitext | first  }}/bin/activate"
       pip install -r "../venv/{{ item | basename }}"
       deactivate
     args:
