@@ -1,4 +1,4 @@
 tensorflow
 uvicorn
 numpy
-
+flask
