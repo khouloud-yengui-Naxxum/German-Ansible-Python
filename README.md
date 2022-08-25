@@ -142,3 +142,16 @@ the changed files.this playbook contains:
       executable: /bin/bash
     with_items: "{{ my_changed_files }}"
 ``` 
+Note : 
+to run this project on a self-hosted runner you should install :
+- docker with the following commands :
+
+$ sudo apt-get update
+
+$ sudo apt install docker.io
+
+$ sudo snap install docker
+
+- python3-venv with the following command :
+
+$ sudo apt-get install python3-venv
